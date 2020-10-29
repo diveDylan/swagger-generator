@@ -3,14 +3,14 @@ import {
   SwaggerGeneratorConstructorOptions,
   SwaggerLang,
   SwaggerApi
-} from './index.d.ts'
+} from './index.d'
 
 import {
   getJSON,
   createModules
-} from './utils.ts'
+} from './utils'
 
-import * as Types from './const.ts'
+import * as Types from './const'
 
 export class SwaggerGenerator {
   public api: string

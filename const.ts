@@ -1,6 +1,5 @@
 
- const encoder = new TextEncoder();
-export const moduleFileHeader = (description:string, headScript: string = '') =>encoder.encode(
+export const moduleFileHeader = (description:string, headScript: string = '') =>(
 `
 /**
  * @description: ${description}

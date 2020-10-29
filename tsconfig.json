@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "rootDir": "./",
+    "outDir": "./lib",
+    "moduleResolution": "Node",
+    "target": "ES2019", 
+    "declaration": true,
+    "typeRoots": [/* 要包含的类型声明文件路径列表*/
+      "./typings",
+      "./node_modules/@types"
+      ],
+  },
+  "exclude": [
+    "node_modules",
+    "lib/**",
+    "**/test"
+  ]
+}

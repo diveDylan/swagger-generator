@@ -1,5 +1,5 @@
-import { SwaggerGenerator } from '../mod.ts'
-import { SwaggerGeneratorConstructorOptions } from '../index.d.ts'
+import { SwaggerGenerator } from '../mod'
+import { SwaggerGeneratorConstructorOptions } from '../index.d'
 
 function tests() {
   new SwaggerGenerator({

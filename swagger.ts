@@ -10,13 +10,13 @@ import {
   Definition,
   CommonObject,
   InterfaceDes
-} from './index.d.ts'
+} from './index.d'
 import {
   makeDepInter,
   makeInter,
   makeInterArr,
   makeInterTypes
-} from './const.ts'
+} from './const'
 
  /**
  * @description 处理单个swagger definition返回 interface
@@ -30,7 +30,7 @@ export function transDefinitionToInterface(definition: Definition, langMap: Comm
   const properties = definition.properties
   const requiredList = definition.required
   function transDefinintion(properties: {
-    [key: string]: Definition
+    [key: string]: InterfaceDes
   }): string {
     return Object
       .keys(properties)
@@ -45,12 +45,12 @@ export function transDefinitionToInterface(definition: Definition, langMap: Comm
             const interfaceName = getInterfaceByRef(property.$ref, item, property, modelsList)
             return makeInterTypes(property.description, item, interfaceName, requiredList.includes(item))
          } else { // array
-          if(property.item.$ref) { // array with ref link
-            const interfaceName = getInterfaceByRef(property.item.$ref, item, property, modelsList)
+          if(property.items.$ref) { // array with ref link
+            const interfaceName = getInterfaceByRef(property.items.$ref, item, property, modelsList)
             return makeInterArr(property.description, item, interfaceName, requiredList.includes(item))
           } else {
             // transDefinition property.item
-            return makeDepInter(property.description, item, getArrayInterface(property.item,langMap), requiredList.includes(item))
+            return makeDepInter(property.description, item, getArrayInterface(property.items,langMap), requiredList.includes(item))
           }
          }
       }

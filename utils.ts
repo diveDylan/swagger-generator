@@ -6,8 +6,9 @@ import {
   SwaggerMethod,
   Definition,
   CommonObject
-} from './index.d.ts'
-import { moduleFileHeader} from './const.ts'
+} from './index.d'
+import { moduleFileHeader} from './const'
+import * as file from 'fs'
 /**
  * @param url： swagger api url
  */
@@ -29,9 +30,9 @@ export function createModules(tags:SwaggerTag[], folder: string, headScript: str
     const name = getTagsFolderName(item.name)
     const directory = folder + '/' + name
     obj[item.name] = directory
-    Deno.mkdirSync(directory)
-    Deno.writeFile(directory + '/index.ts', moduleFileHeader(item.description, headScript))
-    Deno.writeFile(directory + '/interface.ts', moduleFileHeader(item.description, headScript))
+    file.mkdirSync(directory)
+    file.writeFileSync(directory + '/index.ts', moduleFileHeader(item.description, headScript))
+    file.writeFileSync(directory + '/interface.ts', moduleFileHeader(item.description, headScript))
   })
   return obj
 }
