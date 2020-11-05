@@ -6,8 +6,8 @@ import {
   SwaggerMethod,
   Definition,
   CommonObject
-} from './index.d'
-import { moduleFileHeader} from './const'
+} from '../../index.d'
+import { moduleFileHeader} from '../template/interface'
 import * as file from 'fs'
 /**
  * @param url： swagger api url
@@ -17,24 +17,23 @@ export function getJSON(url: string): Promise<SwaggerApi> {
   .then(res => res.json())
 }
 
-
 /**
  * @description 通过tags创建模块目录和初始文件
  * @return tags和目录的字典
  * @param tags 
  * @param folder 
  */
-export function createModules(tags:SwaggerTag[], folder: string, headScript: string ): CommonObject {
-  const obj: CommonObject = {}
+export function createModules(tags:SwaggerTag[], folder: string, headScript: string ): Map<string, string> {
+  const folderMap = new Map<string, string>()
   tags.forEach(item => {
     const name = getTagsFolderName(item.name)
     const directory = folder + '/' + name
-    obj[item.name] = directory
+    folderMap.set(item.name, directory)
     file.mkdirSync(directory)
     file.writeFileSync(directory + '/index.ts', moduleFileHeader(item.description, headScript))
     file.writeFileSync(directory + '/interface.ts', moduleFileHeader(item.description, headScript))
   })
-  return obj
+  return folderMap
 }
 
 
@@ -50,7 +49,5 @@ export function getTagsFolderName (name: string): string {
 }
 
 
-export function dealRequest() {
 
-}
 

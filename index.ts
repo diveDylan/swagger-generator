@@ -2,15 +2,16 @@
 import {
   SwaggerGeneratorConstructorOptions,
   SwaggerLang,
-  SwaggerApi
+  SwaggerApi,
+  Definition
 } from './index.d'
 
 import {
   getJSON,
   createModules
-} from './utils'
+} from './src/utils'
 
-import * as Types from './const'
+import * as Types from './src/const'
 
 export class SwaggerGenerator {
   public api: string
@@ -21,6 +22,7 @@ export class SwaggerGenerator {
   public baseUrl: string
   public langMap?: object
   public headScript: string
+  public models: Definition[] // 类型的接口聚合文件--无法匹配到controller的一些interface
 
   constructor(options:SwaggerGeneratorConstructorOptions) {
     this.api = options.api
@@ -43,7 +45,7 @@ export class SwaggerGenerator {
     this.data = await getJSON(this.api)
     // 按模块创建
     this.directoryMap = createModules(this.data.tags, this.folder, this.headScript)
-    // 
+    // 按路径创建接口和请求文件
 
   }
 

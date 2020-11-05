@@ -10,13 +10,13 @@ import {
   Definition,
   CommonObject,
   InterfaceDes
-} from './index.d'
+} from '../../index.d'
 import {
   makeDepInter,
   makeInter,
   makeInterArr,
   makeInterTypes
-} from './const'
+} from '../template/interface'
 
  /**
  * @description 处理单个swagger definition返回 interface
@@ -50,6 +50,7 @@ export function transDefinitionToInterface(definition: Definition, langMap: Comm
             return makeInterArr(property.description, item, interfaceName, requiredList.includes(item))
           } else {
             // transDefinition property.item
+            // TODO: Item inner has $ref link
             return makeDepInter(property.description, item, getArrayInterface(property.items,langMap), requiredList.includes(item))
           }
          }
@@ -96,3 +97,5 @@ function getArrayInterface(arrayItem, langMap): string {
     return makeInter(property.description, item, property.type, true)
   }).join('')
 }
+
+

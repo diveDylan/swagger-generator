@@ -51,7 +51,9 @@ export interface SwaggerPath<T> {
   }
 }
 
-
+export interface SwaggerPaths {
+    [key: string]: SwaggerPath<SwaggerMethod>
+}
 export interface SwaggerApi {
   swagger: string
   info: {
@@ -62,9 +64,7 @@ export interface SwaggerApi {
   host: string
   basePath: string
   tags: SwaggerTag []
-  path: {
-    [key: string]: SwaggerPath<SwaggerMethod>
-  }
+  path: SwaggerPaths
   definitions: {
     [key: string]: Definition
   }
