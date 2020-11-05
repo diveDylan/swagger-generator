@@ -48,3 +48,9 @@ ${item}${required ? '': '?'}: {
 }\n
 `
 
+
+export const modelHeader = `
+/**
+ * @description 共用的ts接口文件
+ */
+`

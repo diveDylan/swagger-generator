@@ -1,0 +1,29 @@
+{
+  "name": "swagger-generator",
+  "version": "1.0.0",
+  "description": "swagger generator via swagger V2",
+  "main": ".eslintrc.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.2"
+  },
+  "scripts": {
+    "test": "tsc && node ./lib/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diveDylan/swagger-generator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/diveDylan/swagger-generator/issues"
+  },
+  "homepage": "https://github.com/diveDylan/swagger-generator#readme"
+}

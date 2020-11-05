@@ -64,7 +64,7 @@ export interface SwaggerApi {
   host: string
   basePath: string
   tags: SwaggerTag []
-  path: SwaggerPaths
+  paths: SwaggerPaths
   definitions: {
     [key: string]: Definition
   }

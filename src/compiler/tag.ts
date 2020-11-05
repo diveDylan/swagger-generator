@@ -7,8 +7,9 @@ import {
   Definition,
   CommonObject
 } from '../../index.d'
-import { moduleFileHeader} from '../template/interface'
+import { moduleFileHeader, InterfaceFileHeader, modelHeader} from '../template/interface'
 import * as file from 'fs'
+import * as fetch from 'node-fetch'
 /**
  * @param url： swagger api url
  */
@@ -25,13 +26,14 @@ export function getJSON(url: string): Promise<SwaggerApi> {
  */
 export function createModules(tags:SwaggerTag[], folder: string, headScript: string ): Map<string, string> {
   const folderMap = new Map<string, string>()
+  file.writeFileSync(folder + '/index.d.ts', modelHeader )
   tags.forEach(item => {
     const name = getTagsFolderName(item.name)
     const directory = folder + '/' + name
     folderMap.set(item.name, directory)
     file.mkdirSync(directory)
     file.writeFileSync(directory + '/index.ts', moduleFileHeader(item.description, headScript))
-    file.writeFileSync(directory + '/interface.ts', moduleFileHeader(item.description, headScript))
+    file.writeFileSync(directory + '/interface.ts', InterfaceFileHeader)
   })
   return folderMap
 }
