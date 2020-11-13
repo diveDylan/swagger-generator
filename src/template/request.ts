@@ -1,24 +1,17 @@
 import { SwaggerMethod, CommonObject } from '../../index.d'
-// 组装请求函数头
-export const makeRequestCommentHeader = (summary: string, description: string): string => `
-/**
- * 
- * @summary ${summary}
- * @description ${description}
- */\n
-`
 
 interface RequestTemplateProps {
   url: string
-  method: SwaggerMethod
+  method: SwaggerMethod 
   name: string
-  params?: CommonObject
+  params?: CommonObject // query
   paramsInterface?: string
-  data?: CommonObject
+  data?: CommonObject // body
   dataInterface?: string
   headers?: Headers
   responseInterface: string
-
+  summary: string
+  description: string
 }
 // 组装请求函数
 export const makeRequestFunction = (props: RequestTemplateProps): string => {
@@ -27,6 +20,11 @@ export const makeRequestFunction = (props: RequestTemplateProps): string => {
   const params = props.params ? `params: Types.${props.paramsInterface} ` : ''
   const paramsBody = props.params ? `params,` : ''
   return `
+/**
+ * 
+ * @summary ${props.summary}
+ * @description ${props.description}
+ */\n
 export const ${props.name} = ({${data}${params}}, signal): Promise<Types.${props.responseInterface}> => 
   request.${props.method}('${props.url}, {
     ${dataBody}

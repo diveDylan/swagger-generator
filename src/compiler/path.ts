@@ -17,7 +17,7 @@ import {
   Params
 } from '../../index.d'
 import * as file from 'fs'
-import { makeRequestCommentHeader} from '../template/request'
+import { makeRequestFunction} from '../template/request'
 import { ControllerPath } from '../../index'
 
 // 处理路径得到映射关系
