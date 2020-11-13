@@ -6,6 +6,10 @@ export interface SwaggerGeneratorConstructorOptions {
   headScript?: string
 }
 
+export interface CommonOject {
+  [key: string]: any
+}
+
 
 // sawgger tag in api doc
 export interface SwaggerTag {
