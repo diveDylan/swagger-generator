@@ -24,16 +24,16 @@ export interface ControllerPath  {
 
 }
 export class SwaggerGenerator {
-  public api: string
-  public folder: string
-  public data?: SwaggerApi
-  public lang: SwaggerLang
-  public directoryMap?: object
-  public baseUrl: string
-  public langMap?: object
-  public headScript: string
+  public api: string // swagger json https 地址
+  public folder: string // 目标文件目录
+  public data?: SwaggerApi // swagger的json
+  public lang: SwaggerLang // java php go
+  public directoryMap?: object // 文件目录的结构映射
+  public baseUrl: string // fetch baseUrl
+  public langMap?: object // 特殊语言处理的map映射
+  public headScript: string // 头部自定义的引入文件 import request from
   public models: Definition[] // 类型的接口聚合文件--无法匹配到controller的一些interface
-  public controllerMap: Map<string, ControllerPath[]>
+  public controllerMap: Map<string, ControllerPath[]> // 每个controller和请求的合集
   constructor(options:SwaggerGeneratorConstructorOptions) {
     this.api = options.api
     this.folder = options.folder
