@@ -1,4 +1,16 @@
-import { SwaggerMethod } from '../../index.d';
-export declare const makeRequestCommentHeader: (summary: string, description: string) => string;
-export declare const makeRequestFunction: (url: string, functionName: string, method: SwaggerMethod, requestTypes: string, responseTypes: string) => string;
-export declare const makePostNoReqParamsFunction: (url: string, functionName: string, method: SwaggerMethod, responseTypes: string) => string;
+import { SwaggerMethod, CommonObject } from '../../index.d';
+interface RequestTemplateProps {
+    url: string;
+    method: SwaggerMethod;
+    name: string;
+    params?: CommonObject;
+    paramsInterface?: string;
+    data?: CommonObject;
+    dataInterface?: string;
+    headers?: Headers;
+    responseInterface: string;
+    summary: string;
+    description: string;
+}
+export declare const makeRequestFunction: (props: RequestTemplateProps) => string;
+export {};

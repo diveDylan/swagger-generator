@@ -38,7 +38,7 @@ export function createModules(tags:SwaggerTag[], folder: string, headScript: str
   return folderMap
 }
 
-
+// post -> param.foreach -> query interface QueryCompanyDetailUsingPOSTQuery
 export function getTagsFolderName (name: string): string {
   const tagsArr: string[] = name.split('-')
   tagsArr.pop()

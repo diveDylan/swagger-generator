@@ -1,25 +1,37 @@
-import { SwaggerMethod, } from '../../index.d'
-// 组装请求函数头
-export const makeRequestCommentHeader = (summary: string, description: string): string => `
+import { SwaggerMethod, CommonObject } from '../../index.d'
+
+interface RequestTemplateProps {
+  url: string
+  method: SwaggerMethod 
+  name: string
+  params?: CommonObject // query
+  paramsInterface?: string
+  data?: CommonObject // body
+  dataInterface?: string
+  headers?: Headers
+  responseInterface: string
+  summary: string
+  description: string
+}
+// 组装请求函数
+export const makeRequestFunction = (props: RequestTemplateProps): string => {
+  const data = props.data ? `data: Types.${props.dataInterface},` : ''
+  const dataBody = props.data ? `data,` : ''
+  const params = props.params ? `params: Types.${props.paramsInterface} ` : ''
+  const paramsBody = props.params ? `params,` : ''
+  return `
 /**
  * 
- * @summary ${summary}
- * @description ${description}
+ * @summary ${props.summary}
+ * @description ${props.description}
  */\n
-`
-// 组装请求函数
-export const makeRequestFunction = (url: string, functionName: string, method: SwaggerMethod, requestTypes: string, responseTypes: string): string => {
-  return `
-export const ${functionName} = (data: Types.${requestTypes}): Promise<Types.${responseTypes}> => request.${method}('${url}, {data})
+export const ${props.name} = ({${data}${params}}, signal): Promise<Types.${props.responseInterface}> => 
+  request.${props.method}('${props.url}, {
+    ${dataBody}
+    ${paramsBody}
+  })
   
   `
 }
 
 
-// 处理没有入参的请求
-export const makePostNoReqParamsFunction = (url: string, functionName: string, method: SwaggerMethod, responseTypes: string): string => {
-  return `
-export const ${functionName} = (): Promise<Types.${responseTypes}> => request.${method}('${url}, {data})
-  
-  `
-}
