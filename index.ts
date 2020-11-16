@@ -65,7 +65,7 @@ export class SwaggerGenerator {
 
 const testCase: SwaggerGeneratorConstructorOptions = {
   api: 'http://10.8.110.1:19130/v2/api-docs',
-  folder: './test',
+  folder: './test', // 检查是否是文件夹，不是就新建
   lang: 'java'
 }
 
